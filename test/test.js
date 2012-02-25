@@ -3411,6 +3411,13 @@ data = {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 4 }
             }
+        },
+
+        '"use strict";\n077;': {
+            index: 14,
+            lineNumber: 2,
+            column: 1,
+            message: 'Error: Line 2: Octal literals are not allowed in strict mode.'
         }
 
     },
@@ -3776,7 +3783,80 @@ data = {
                 start: { line: 1, column: 0 },
                 end: { line: 1, column: 14 }
             }
+        },
+
+        '"use strict";\n"Hello\\0World"': {
+            type: 'Program',
+            body: [
+                {
+                    type: 'ExpressionStatement',
+                    expression: {
+                        type: "Literal",
+                        value: 'use strict',
+                        raw: '"use strict"',
+                        range: [0, 11],
+                        loc: {
+                            start: {
+                                line: 1,
+                                column: 0
+                            },
+                            end: {
+                                line: 1,
+                                column: 12
+                            }
+                        }
+                    },
+                    range: [0, 12],
+                    loc: {
+                        start: {
+                            line: 1,
+                            column: 0
+                        },
+                        end: {
+                            line: 1,
+                            column: 13
+                        }
+                    }
+                }, {
+                    type: 'ExpressionStatement',
+                    expression: {
+                        type: 'Literal',
+                        value: 'Hello\u0000World',
+                        raw: '"Hello\\0World"',
+                        range: [14, 27],
+                        loc: {
+                            start: { line: 2, column: -1 },
+                            end: { line: 2, column: 13 }
+                        }
+                    },
+                    range: [14, 27],
+                    loc: {
+                        start: { line: 2, column: -1 },
+                        end: { line: 2, column: 13 }
+                    }
+                }
+            ],
+            range: [0, 27],
+            loc: {
+                start: {
+                    line: 1,
+                    column: 0
+                },
+                end: {
+                    line: 2,
+                    column: 13
+                }
+            },
+            comments: [] // if we provide property "comment", the whole tree is compared - not only body[0]
+        },
+
+        '"use strict";\n"Hello\\01World"': {
+            index: 14,
+            lineNumber: 2,
+            column: 1,
+            message: 'Error: Line 2: Octal literals are not allowed in strict mode.'
         }
+
     },
 
     'Regular Expression Literals': {

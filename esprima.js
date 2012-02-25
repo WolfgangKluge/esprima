@@ -1074,11 +1074,19 @@ parseStatement: true, parseSourceElement: true */
         ch = source[index];
 
         if (ch === '\'' || ch === '"') {
-            return scanStringLiteral();
+            token = scanStringLiteral();
+            if (strict && token.octal) {
+                throwError(token, Messages.StrictOctalLiteral);
+            }
+            return token;
         }
 
         if (ch === '.' || isDecimalDigit(ch)) {
-            return scanNumericLiteral();
+            token = scanNumericLiteral();
+            if (strict && token.octal) {
+                throwError(token, Messages.StrictOctalLiteral);
+            }
+            return token;
         }
 
         token = scanIdentifier();
