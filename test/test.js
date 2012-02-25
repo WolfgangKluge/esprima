@@ -3077,6 +3077,13 @@ data = {
                 type: 'Block',
                 value: ' perfect '
             }]
+        },
+
+        '/*invalid\nmultiline\ncomment/* /': {
+            index: 31,
+            lineNumber: 3,
+            column: 12,
+            message: 'Error: Line 3: Unexpected end of input'
         }
 
     },

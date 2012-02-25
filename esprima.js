@@ -399,6 +399,10 @@ parseStatement: true, parseSourceElement: true */
                 break;
             }
         }
+
+        if (blockComment) {
+            throwError({}, Messages.UnexpectedEOS);
+        }
     }
 
     function scanHexEscape(prefix) {
